@@ -1,0 +1,36 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <l:layout title="iCEDQ Jenkins build Result">
+        <st:bind var="remoteAction" value="${it}"/>
+        <j:set var="pluginName" value="icedq"/>
+        <j:set var="resBase" value="${resURL}/plugin/${pluginName}"/>
+        <l:main-panel>
+            <style type="text/css">
+                @import url(${resURL}/plugin/${pluginName}/css/app.css);
+                @import url(${resURL}/plugin/${pluginName}/lib/DataTables/datatables.css);
+            </style>   
+            <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/DataTables/datatables.js"></script> 
+            <!--<script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/DataTables/ellipsis.js"></script>--> 
+            <!--<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.15/dataRender/ellipsis.js"></script>-->
+            <script>    
+                var $j = jQuery.noConflict();
+            </script>           
+            <a href="http://icedq.com/" target="_blank">
+                <img src="${resURL}/plugin/${pluginName}/images/icedq-logo-small.png" />
+            </a>
+            <table id="iceResultTable" field="iceResultTable" name="ice Result Table" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th align="left">Type</th>
+                        <th align="left">Name</th>
+                        <th align="left">Code</th>
+                        <th align="left">Exit Code</th>
+                        <th align="left">Reason Code</th>
+                        <th align="left">Status</th>
+<!--                        <th align="left" style="padding-left:0px !important">More Info</th>-->
+                    </tr>
+                </thead>
+            </table>               
+            <script type="text/javascript" src="${resBase}/js/result.js"></script>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

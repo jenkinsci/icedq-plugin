@@ -1,0 +1,135 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:f="/lib/form">
+    <j:set var="pluginName" value="icedq"/>
+    <style type="text/css">
+        @import url(${resURL}/plugin/${pluginName}/css/sweetalert.css);
+        @import url(${resURL}/plugin/${pluginName}/css/app.css);
+        @import url(${resURL}/plugin/${pluginName}/lib/DataTables/datatables.css);
+    </style>   
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/DataTables/datatables.js"></script>    
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/DataTables/ellipsis.js"></script>    
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/cryptoJs/aes.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/cryptoJs/pbkdf2.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/cryptoJs/enc-base64-min.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/lib/sweetalert-dev.js"></script>
+    <!--<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.15/dataRender/ellipsis.js"></script>-->
+    <script>
+        var $j = jQuery.noConflict();
+    </script>
+    <form>
+        <st:bind var="remoteAction" value="${descriptor}"/>
+        <f:entry  field="serverCnnection">
+            <span style=" text-align: left; font-weight: bold; font-size: 16px">
+                Servers
+            </span>
+            <table id="iceServerConnTable" field="iceServerConnTable" name="Icedq server Connections" class="display" cellspacing="0" style="max-height:180px">
+                <thead>
+                    <tr>
+                        <th align="left"></th>
+                        <th align="left">Server</th>
+                        <th align="left">Repository</th>
+                        <th align="left">User</th>
+                        <th align="left">Url</th>                 
+                    </tr>
+                </thead>
+            </table>   
+        </f:entry>
+        
+        <f:entry>
+            <hr></hr>  
+        </f:entry>         
+        <f:entry field="searchRuleTable">
+            <table id="searchRuleTable" field="searchRuleTable" class="tbl display" style="width:100%;border:none">
+                <tbody>
+                    <tr>
+                        <td class="ice-table">                         
+                            <select id="selectObjTypeId" style="width:100%">
+                                <option value="Rule">Rule</option>
+                                <option value="Batch">Batch</option>
+<!--                                <option value="Testset">Test set</option>
+                                <option value="Testsetfolder">Test set folder</option>-->
+                            </select>
+                        </td>
+                        <td class="ice-table">
+                            <input placeholder="Token" style="width:100%;padding-left:5px; height:29px;border:1px solid #aaaaaa" type="text" name="token" id="token"/>
+                        </td>
+                        <td class="ice-table">
+                            <input placeholder="code/name" style="width:100%;padding-left:5px; height:29px;border:1px solid #aaaaaa" type="text" name="objName" id="objName"/>
+                        </td>
+                        
+                        <td class="ice-table" style="width:150px;white-space:nowrap">
+                            <button id="searchRulesBtn"  class="dt-button buttons-create">Start</button>
+                        
+                            <button id="abortSearchBtn"  class="dt-button buttons-create">Stop</button>
+                        </td>
+                    </tr>             
+                </tbody>
+            </table>
+            <br></br>      
+        </f:entry>
+        <f:entry>
+            <div id="sTableProgressBarDiv" style="display: none;" >
+                <div id="sTableProgressBar" class="loader"></div>
+            </div> 
+            <div id="noSearchResultDiv" style="display: none;" >
+                <div>No Search Result</div>
+            </div>
+            <div id="iceSearchResultTableDiv">
+                <hr/>  
+                <br></br>
+                <table id="iceSearchResultTable" field="iceSearchResultTable" class="display" style="max-height:260px">
+                    <thead>
+                        <tr>                     
+                            <th align="left" >Server</th> 
+                            <th align="left">Project</th>
+                            <th align="left">Folder</th>
+                            <th align="left" >Name</th>
+                            <th align="left" >Info</th>   
+                            <th align="left">FLAG_TYPE</th> 
+                            <th align="left">Rule Code</th>
+                            <th align="left">Rule Type</th>
+                            <th align="left" >LEGAL ENTITY NAME</th>
+                            <th align="left" ></th>       
+                        </tr>
+                    </thead>
+                </table>
+                
+                <br/>  
+            </div>  
+            <hr/> 
+        </f:entry>     
+        <f:entry field="iceExecuteRuleTable">
+            <table id="iceExecuteRuleTable" field="iceExecuteRuleTable" class="tbl display" >
+                <caption style=" text-align: left; font-weight: bold; font-size: 16px">Execute</caption>
+                <thead>
+                    <tr>
+                        <th align="left" style="white-space:no-wrap;min-width:55px">Order</th>
+                        <th align="left">Server</th>
+                        <th align="left">Project</th>
+                        <th align="left">Folder</th>
+                        <th align="left">Type</th>
+                        <th align="left">Code</th>
+                        <th align="left">Name</th>
+                        <th align="left" >LEGAL ENTITY NAME</th>
+                        <th align="left" >On Success</th>
+                        <th align="left" >On Failure</th>
+                        <th align="left" >On Error</th>
+                        <th align="left">Parameter</th>
+                        <th align="left"></th>
+                    </tr>
+                </thead>
+            </table> 
+            <br></br>
+        </f:entry>
+        <f:entry>
+            <div style="float:left">
+                <button id="finalizeRuleBtn" class="dt-button buttons-create">Confirm</button> 
+                <button id="clearRuleBtn" class="dt-button buttons-create">Remove</button>
+            </div>
+            <br></br>  
+        </f:entry>
+   
+    </form>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/js/AesUtil.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/js/service.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/${pluginName}/js/app.js"></script>
+</j:jelly>
