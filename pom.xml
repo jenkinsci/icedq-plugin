@@ -9,7 +9,7 @@
         <relativePath />
     </parent>
     <groupId>com.icedq.ci.plugin</groupId>
-    <artifactId>icedq</artifactId>
+    <artifactId>i-ced-q</artifactId>
     <version>1.0</version>
     <packaging>hpi</packaging>
     
