@@ -9,8 +9,8 @@
         <relativePath />
     </parent>
     <groupId>com.icedq.ci.plugin</groupId>
-    <artifactId>icedq-SNAPSHOT</artifactId>
-    <version>1.0</version>
+    <artifactId>icedq</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>hpi</packaging>
     
     <!--    Jenkins Latest Version Now and Java -->
