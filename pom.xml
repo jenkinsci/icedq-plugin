@@ -138,6 +138,11 @@
     </dependencies>
 <!--     If you want this to appear on the wiki page:  -->
     <developers>
+	    <developer>
+            <id>developer</id>
+            <name>toranainc</name>
+            <email>developer@toranainc.com</email>
+        </developer>
         <developer>
             <id>amitb</id>
             <name>Amit Bhoyar </name>
