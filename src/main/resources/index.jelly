@@ -3,5 +3,5 @@
   This view is used to render the installed plugins page.
 -->
 <div>
-  This is ICEDQ plugin .
+  This is a plugin for <a href="https://icedq.com/">iCEDQ</a>.
 </div>
